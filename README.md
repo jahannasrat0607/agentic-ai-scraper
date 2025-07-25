@@ -1,111 +1,87 @@
-# 🛒 Amazon Product Scraper
+# ProductGenie – Amazon Product Scraper
 
-A clean, modular web scraper for Amazon product listings and details, built with Python and structured using a clean architecture approach.
+**agentic-ai-scraper** is a modular and efficient Amazon product scraper built with Python and Streamlit.  
+It allows users to search Amazon by keyword and region, and view product data like titles, prices, ratings, and more through an interactive web interface.
 
-This scraper allows you to extract key product data (like titles, prices, ratings, and more) and explore it via a user-friendly Streamlit interface.
+## Features
 
----
+- Keyword-based product search
+- Country-specific Amazon scraping (`us`, `in`, `uk`, etc.)
+- Clean, extensible architecture (controllers, models, enums, helpers)
+- Multi-threaded scraping for faster performance
+- Streamlit interface for ease of use
+- Ready for future LLM integration (optional OpenAI module included)
 
-## 🚀 Features
+## Project Structure
 
-- 🔍 Search for any product on Amazon by keyword  
-- 🌍 Supports location-based scraping (e.g. `us`, `uk`, `fr`)  
-- 🧠 Clean and maintainable architecture (controllers, models, enums, helpers)  
-- 🧵 Multi-threaded for improved performance  
-- 🖥️ Streamlit UI for interactive use  
-- 📦 Organized codebase ready for extensions (LLM integration, analysis, etc.)
-
----
-
-## 🌿 Branch Structure
-
-This project is organized into four development branches, each representing a major step in the project’s lifecycle:
-
-- `scraper_001`: sets up the environment and clean folder architecture (no scraper code yet)
-- `scraper_002`: implements the scraping pipeline and controller logic
-- `scraper_003`: adds the Streamlit user interface for interacting with the scraper
-- `scraper_004`: prepares the branch for optional LLM integration to enhance functionality
-
-Switching between branches lets you explore the project step by step and understand its evolution.
-
-### 📁 Project Structure
-
-amazon_scraper/
-
-├── controllers/
-│ └── scraper_controller.py # Handles scraping logic (listing + product page)
-├── enums/
-│ └── constant_urls.py # Enum for Amazon base URLs per location
-├── helpers/
-│ └── scraper_utils.py # Utility functions (like fetch, parse)
-├── models/
-│ └── product_data.py # Dataclasses for structured product data
-├── llm/
-│ └── openai_client.py # (Optional) For future LLM integration
-├── ui/
-│ └── app.py # Streamlit interface
-├── main.py # Entrypoint for CLI use
+agentic-ai-scraper/
+├── controllers/ # Scraping logic
+├── enums/ # Country-specific URL enums
+├── helpers/ # Utility functions
+├── models/ # Structured product data using dataclasses
+├── llm/ # Placeholder for future LLM integration
+├── ui/ # Streamlit frontend
+├── main.py # Command-line interface (optional)
 ├── requirements.txt # Python dependencies
-└── README.md # Project overview
+└── README.md # Project documentation
 
-#### 💡 How It Works
 
-1. **Product Listing Scrape**  
-   Using `scraper_controller.py`, the script navigates to Amazon search results and collects product blocks.
+## Setup Instructions
 
-2. **Product Page Scrape**  
-   For each product, the scraper fetches its detailed page and extracts structured data.
+### 1. Clone the Repository
 
-3. **Streamlit UI**  
-   Run the app and search interactively from your browser!
-
----
-
-##### 🧪 Quickstart
-
-### 1. Clone the repo
-
-git clone https://github.com/Aminedalhy/Scraper
----
+```bash
+git clone https://github.com/yourusername/agentic-ai-scraper.git
+cd agentic-ai-scraper
 
 ### 2. Create virtual environment
-conda create --name Scraper
-conda activate Scraper
+conda create -n productgenie python=3.10 -y
+conda activate productgenie
+
 
 ### 3. Install Dependencies
 
 pip install --break-system-packages -r requirements.txt
 
-### 4. Install Dependencies
+### 4. Run the application
 
 streamlit run app.py
 
+Then open your browser and navigate to:
+http://localhost:8501
 
-🧰 Tech Stack
-Python
+## Tech Stack
+Python 3.10
 
 BeautifulSoup4 – HTML parsing
 
 Requests – HTTP client
 
-Streamlit – UI
+Streamlit – Frontend interface
 
-Dataclasses – Typed models
+Dataclasses – Structured data modeling
 
-Enum – URL handling
+Enum – Country-based URL handling
 
-Threading – Faster scraping
+Threading – For concurrent requests
 
-📌 Notes
-This project is for educational purposes. Scraping Amazon may violate their Terms of Service.
+ScrapeOps Proxy – Handles IP rotation and headers
 
-Use responsibly, and consider adding proxies or delays if scaling.
+## Use Cases
+Product research and comparison
 
-🧑‍💻 Author
-Made with ❤️ by AminDALY
-👉 GitHub: @AmineDALHY
-👉 YouTube: @withaminedaly
+Amazon price tracker or trend analysis
 
+Training data collection for ML models
 
+Building a shopping assistant or recommender system
 
+## Disclaimer
+This project is intended for educational and personal research purposes only.
+Scraping Amazon may violate their Terms of Service. Use responsibly and ethically.
+Consider using delays, proxies, and respectful request rates when scaling.
 
+## Author
+Nasrat Jahan
+M.Tech in Data & Computational Science, IIT Jodhpur
+LinkedIn: https://www.linkedin.com/in/nasrat-jahan-95aa76326/
