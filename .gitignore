@@ -4,7 +4,6 @@ venv/
 
 # Ignore CSVs and logs
 *.csv
-!laptop.csv
 *.log
 
 # Ignore Streamlit cache
