@@ -1,22 +1,38 @@
 import requests
 import logging
 from bs4 import BeautifulSoup
-from Products.product import ScrapedProduct
+# from Products.product import ScrapedProduct
 from Helpers.utils import get_scrapeops_url
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
+from Products.product import ScrapedProduct
 
 logger= logging.getLogger(__name__)
 
-def search_products( product_name: str, page_number: int=1, location:str="us", retries: int=2, data_pipeline=None):
+
+def search_products( product_name: str, page_number: int=1, location:str="in", retries: int=2, data_pipeline=None):
     scraped_products= []
     attempts =0
     success = False
 
+
     while attempts < retries and not success:
         try: 
             search_url = get_scrapeops_url(f"https://www.amazon.com/s?k={product_name}&page={page_number}",location)
+            # search_url = get_scrapeops_url(f"https://www.ebay.com/sch/i.html?_nkw={product_name}&_pgn={page_number}", location)
+
             logger.info ( f" Fetching: {search_url}")
-            response= requests.get(search_url)
+            headers = {
+                        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+                        "Accept-Language": "en-US,en;q=0.9"
+                    }
+
+            response = requests.get(search_url, headers=headers)
+
+
+            # response= requests.get(search_url)
             if response.status_code!=200:
                 raise Exception (f"Status code: { response.status_code}")
             
@@ -27,12 +43,17 @@ def search_products( product_name: str, page_number: int=1, location:str="us", r
             
             product_divs = soup.find_all("div")
             for product_div in product_divs:
+                print("="*80)
+                print(product_div.prettify())
+
                 h2 = product_div.find("h2")
                 if not h2 or not h2.text.strip():
                     continue
                 product_title = h2.text.strip()
                 a=h2.find("a")
-                product_url = a.get("href") if a and a.get("href") else "no product url"
+                # product_url = a.get("href") if a and a.get("href") else "no product url"
+                product_url = f"https://www.amazon.com{a.get('href')}" if a and a.get("href") else "no product url"
+
                 name = product_div.get("data-asin")
                 if not name: 
                     continue
@@ -80,3 +101,6 @@ def search_products( product_name: str, page_number: int=1, location:str="us", r
     
 
     return scraped_products
+
+url = get_scrapeops_url("https://www.amazon.com/s?k=headphones", "us")
+print(url)

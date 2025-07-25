@@ -1,4 +1,4 @@
-# ProductGenie – Amazon Product Scraper
+# Amazon Product Scraper
 
 **agentic-ai-scraper** is a modular and efficient Amazon product scraper built with Python and Streamlit.  
 It allows users to search Amazon by keyword and region, and view product data like titles, prices, ratings, and more through an interactive web interface.

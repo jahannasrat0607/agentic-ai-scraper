@@ -1,2 +1,15 @@
+# Ignore virtual environment
+venv/
 .env
+
+# Ignore CSVs and logs
+*.csv
+!laptop.csv
+*.log
+
+# Ignore Streamlit cache
+.streamlit/
+
+# Ignore compiled files
 __pycache__/
+*.pyc
