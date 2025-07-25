@@ -50,7 +50,7 @@ streamlit run app.py
 Then open your browser and navigate to:
 http://localhost:8501
 
-## Sample Streamlit App UI
+### 5. Sample Streamlit App UI
 
 The following screenshot shows the user interface of the product scraping app built with Streamlit. It allows the user to select product categories, trigger scraping, and download the results.
 
